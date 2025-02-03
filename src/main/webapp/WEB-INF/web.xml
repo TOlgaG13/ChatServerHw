@@ -3,4 +3,58 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.AddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetListServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.GetListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetListServlet</servlet-name>
+        <url-pattern>/get</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OnlineUsersServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.OnlineUsersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OnlineUsersServlet</servlet-name>
+        <url-pattern>/online</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChatRoomServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.ChatRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChatRoomServlet</servlet-name>
+        <url-pattern>/chatroom</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserStatusServlet</servlet-name>
+        <servlet-class>homework.chatserverhw.UserStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserStatusServlet</servlet-name>
+        <url-pattern>/status</url-pattern>
+    </servlet-mapping>
+
 </web-app>

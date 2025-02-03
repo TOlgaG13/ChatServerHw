@@ -9,6 +9,7 @@ public class MessageList {
 
     private final Gson gson;
     private final List<Message> list = new LinkedList<>();
+    private final List<Message> privateMessages = new LinkedList<>();
 
     public static MessageList getInstance() {
         return msgList;
@@ -22,9 +23,18 @@ public class MessageList {
         list.add(m);
     }
 
+    public synchronized void addPrivateMessage(Message m) {
+        privateMessages.add(m);
+    }
+
     public synchronized String toJSON(int n) {
         if (n < 0 || n >= list.size()) return null;
         return gson.toJson(new JsonMessages(list, n));
+    }
+
+    public synchronized String toPrivateJSON(int n) {
+        if (n < 0 || n >= privateMessages.size()) return null;
+        return gson.toJson(new JsonMessages(privateMessages, n));
     }
 }
 

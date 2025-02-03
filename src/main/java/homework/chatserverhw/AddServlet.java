@@ -12,18 +12,6 @@ import java.nio.charset.StandardCharsets;
 public class AddServlet  extends HttpServlet {
     private MessageList msgList = MessageList.getInstance();
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        byte[] buf = requestBodyToArray(req); // json
-        String bufStr = new String(buf, StandardCharsets.UTF_8);
-
-        Message msg = Message.fromJSON(bufStr);
-        if (msg != null)
-            msgList.add(msg);
-        else
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
-    }
-
     private byte[] requestBodyToArray(HttpServletRequest req) throws IOException { // Apache commons-io
         InputStream is = req.getInputStream();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -36,6 +24,24 @@ public class AddServlet  extends HttpServlet {
         } while (r != -1);
 
         return bos.toByteArray();
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        byte[] buf = requestBodyToArray(req); // json
+        String bufStr = new String(buf, StandardCharsets.UTF_8);
+
+        Message msg = Message.fromJSON(bufStr);
+        if (msg != null) {
+            if (msg.getTo() != null && !msg.getTo().isEmpty()) {
+                // Приватное сообщение
+                msgList.addPrivateMessage(msg);
+            } else {
+                // Публичное сообщение
+                msgList.add(msg);
+            }
+        } else {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
+        }
     }
 }
 
